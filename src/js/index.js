@@ -31,6 +31,8 @@ function Board({ squares, onClick }) {
 		</div>
 	);
 }
+var person1 = prompt("Please enter gamer name 1");
+var person2 = prompt("Please enter gamer name 2");
 
 function historyReducer(state, action) {
 	const { history, entryNumber } = state;
@@ -91,7 +93,15 @@ function useGame() {
 	} else if (squares.every(Boolean)) {
 		status = `Scratch: Cat's game`;
 	} else {
-		status = `Next player: ${xIsNext ? "X" : "O"}`;
+		status = `Next player: ${xIsNext ? person1 : person2}`;
+	}
+
+	if (winner == "O") {
+		status = "Winner is " + person2;
+	}
+
+	if (winner == "X") {
+		status = "winner is " + person1;
 	}
 
 	return { history, squares, selectSquare, goToStep: goToEntry, status };
@@ -157,7 +167,7 @@ function Usage() {
 Usage.title = "Tic Tac Toe: Advanced State";
 
 Board.propTypes = {
-	squares: PropTypes.string,
+	squares: PropTypes.array,
 	onClick: PropTypes.func
 };
 
